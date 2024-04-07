@@ -6,7 +6,7 @@
 /*   By: ndesprez <ndesprez@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:29:01 by ndesprez          #+#    #+#             */
-/*   Updated: 2024/04/07 04:19:21 by ndesprez         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:00:52 by ndesprez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <string>
 #include <sstream>
 #include <ctime>
-#include <vector>
+#include <list>
 #include <deque>
 #include <algorithm>
 
 std::deque<int>	sort_deque(std::deque<int> *deque);
-std::vector<int>	sort_vector(std::vector<int> *vector);
+std::list<int>	sort_list(std::list<int> *list);

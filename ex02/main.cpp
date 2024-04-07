@@ -6,7 +6,7 @@
 /*   By: ndesprez <ndesprez@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:30:45 by ndesprez          #+#    #+#             */
-/*   Updated: 2024/04/07 04:39:27 by ndesprez         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:32:08 by ndesprez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int	main(int argc, char **argv)
 {
 	std::deque<int>		deque;
-	std::vector<int>	vector;
+	std::list<int>		list;
 	int					val;
 
-	clock_t				start, end, dtime, vtime;
+	clock_t				start, end;
+	double				dtime, ltime;
 	
 	if (argc < 2)
 		return (std::cerr << "Invalid number of arguments." << std::endl, 1);
@@ -39,7 +40,7 @@ int	main(int argc, char **argv)
 				return (std::cerr << "Duplicated value." << std::endl, 1);
 		}
 		deque.push_back(val);
-		vector.push_back(val);
+		list.push_back(val);
 	}
 	
 	std::cout << "Before :";
@@ -51,12 +52,12 @@ int	main(int argc, char **argv)
 	start = clock();
 	deque = sort_deque(&deque);
 	end = clock();
-	dtime = end - start;
+	dtime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
 	start = clock();
-	vector = sort_vector(&vector);
+	list = sort_list(&list);
 	end = clock();
-	vtime = end - start;
+	ltime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
 
 	std::cout << "After  :";
@@ -64,8 +65,8 @@ int	main(int argc, char **argv)
 		std::cout << " " << *ite;
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << deque.size() << " elements with std::deque  : " << dtime << " s" << std::endl;
-	std::cout << "Time to process a range of " << vector.size() << " elements with std::vector : " << vtime << " s" << std::endl;
+	std::cout << "Time to process a range of " << deque.size() << " elements with std::deque : " << dtime << " µs" << std::endl;
+	std::cout << "Time to process a range of " << list.size() << " elements with std::list  : " << ltime << " µs" << std::endl;
 
 	return (0);
 }
