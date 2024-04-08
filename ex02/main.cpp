@@ -6,7 +6,7 @@
 /*   By: ndesprez <ndesprez@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:30:45 by ndesprez          #+#    #+#             */
-/*   Updated: 2024/04/07 18:32:08 by ndesprez         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:37:29 by ndesprez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	clock_t				start, end;
 	double				dtime, ltime;
 	
-	if (argc < 2)
+	if (argc < 3)
 		return (std::cerr << "Invalid number of arguments." << std::endl, 1);
 	
 	for (int i = 1; i < argc; i++)

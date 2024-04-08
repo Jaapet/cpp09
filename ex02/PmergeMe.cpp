@@ -6,7 +6,7 @@
 /*   By: ndesprez <ndesprez@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:28:49 by ndesprez          #+#    #+#             */
-/*   Updated: 2024/04/07 18:24:03 by ndesprez         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:36:07 by ndesprez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 template <typename Iterator>
 Iterator	uplow(Iterator ite, char c)
 {
+	Iterator	copy = ite;
 	if (c == '+')
-		++ite;
+		++copy;
 	else if (c == '-')
-		--ite;
-	return (ite);
+		--copy;
+	return (copy);
 }
 
 template <typename T>
@@ -60,13 +61,27 @@ void	binary_search(T *c, typename T::iterator ite, typename T::iterator mid, int
 		else if (*ite < *(uplow(mid, '-')))
 			binary_search(c, ite, uplow(mid, '-'), size);
 	}
-	else
+	else if (size >= 2)
 	{
 		size /= 2;
 		if (*ite < *mid)
-			std::advance(mid, -size);
+		{
+			int	i = 1;
+			while (i <= size && mid != c->begin())
+			{
+				std::advance(mid, -1);
+				i++;
+			}
+		}
 		else
-			std::advance(mid, size);
+		{
+			int	i = 1;
+			while (i <= size && mid != uplow(c->end(), '-'))
+			{
+				std::advance(mid, 1);
+				i++;
+			}
+		}
 		binary_search(c, ite, mid, size);
 	}
 }
@@ -79,12 +94,14 @@ std::deque<int>	ford_johnson_deque(std::deque<int> *c)
 	std::sort(S.begin(), S.end());
 	c = &S;
 
-	typename std::deque<int>::iterator mid = c->begin();
-    std::advance(mid, c->size() / 2);
+	typename std::deque<int>::iterator mid;
 
 	for (typename std::deque<int>::iterator ite = low.begin(); ite != low.end(); ++ite)
+	{
+		mid = c->begin();
+    	std::advance(mid, c->size() / 2);
 		binary_search(c, ite, mid, c->size());
-
+	}
 	return (*c);
 }
 
